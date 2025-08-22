@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+
+@layer utilities {
+  .animate-scroll-up {
+    animation: scrollUp 12s linear infinite;
+  }
+}
+
+
+@keyframes scrollUp {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+
+@keyframes scroll-up {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.animate-scroll-up {
+  animation: scroll-up 30s linear infinite;
+  will-change: transform;
+}
+
+.group:hover .animate-scroll-up {
+  animation-play-state: paused;
+}
+
