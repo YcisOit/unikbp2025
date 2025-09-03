@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
@@ -7,24 +7,23 @@ import Image from "next/image";
 
 const UniversitySection = () => {
   const [activeTab, setActiveTab] = useState("university");
+  const [notices, setNotices] = useState([]);
 
-  const universityNotices = [
-    { title: "Annual Exam Timetable 2024", href: "/pdf/annual_exam.pdf" },
-    { title: "Revaluation Results 2024", href: "https://externalwebsite.com/reval.pdf" },
-    { title: "Convocation Registration Form", href: "/pdf/convocation_form.pdf" },
-    { title: "Annual Exam Timetable 2024", href: "/pdf/annual_exam.pdf" },
-    { title: "Annual Exam Timetable 2024", href: "/pdf/annual_exam.pdf" },
-    { title: "Annual Exam Timetable 2024", href: "/pdf/annual_exam.pdf" },
-    { title: "Revised-Notice-Anti-Ragging-CommitteeAnti-Ragging", href: "/pdf/annual_exam.pdf" },
-  ];
+  useEffect(() => {
+    const fetchNotices = async () => {
+      try {
+        const res = await fetch("/admin/api/getNotices");
+        const data = await res.json();
+        setNotices(data);
+      } catch (err) {
+        console.error("Error fetching notices", err);
+      }
+    };
+    fetchNotices();
+  }, []);
 
-  const collegeNotices = [
-    { title: "College Sports Meet 2024", href: "/pdf/sports_meet.pdf" },
-    { title: "Annual Gathering 2024 Details", href: "https://externalwebsite.com/gathering.pdf" },
-    { title: "Notice for Admissions 2024-25", href: "/pdf/admissions.pdf" },
-  ];
-
-  const notices = activeTab === "university" ? universityNotices : collegeNotices;
+  // Filter notices based on selected tab
+  const filteredNotices = notices.filter(n => n.type === activeTab);
 
   const profiles = [
     {
@@ -88,32 +87,31 @@ const UniversitySection = () => {
           </div>
 
           <div className="h-[300px] overflow-hidden relative group">
-  <div className="absolute bottom-0 flex flex-col space-y-2 animate-scroll-up">
-    {[...notices, ...notices].map((notice, index) => (
-      <div key={index} className="border-b pb-1 flex items-center gap-2">
-        <Image src="/new-icon-gif-3.gif" alt="New" width={32} height={24} />
-        {notice.href.startsWith("http") ? (
-          <a
-            href={notice.href}
-            className="text-gray-800 hover:text-blue-600 underline text-base"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {notice.title}
-          </a>
-        ) : (
-          <Link
-            href={notice.href}
-            className="text-gray-800 hover:text-blue-600 underline text-base"
-          >
-            {notice.title}
-          </Link>
-        )}
-      </div>
-    ))}
-  </div>
-</div>
-
+            <div className="absolute bottom-0 flex flex-col space-y-2 animate-scroll-up">
+              {[...filteredNotices, ...filteredNotices].map((notice, index) => (
+                <div key={index} className="border-b pb-1 flex items-center gap-2">
+                  <Image src="/new-icon-gif-3.gif" alt="New" width={32} height={24} />
+                  {notice.href.startsWith("http") ? (
+                    <a
+                      href={notice.href}
+                      className="text-gray-800 hover:text-blue-600 underline text-base"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {notice.title}
+                    </a>
+                  ) : (
+                    <Link
+                      href={notice.href}
+                      className="text-gray-800 hover:text-blue-600 underline text-base"
+                    >
+                      {notice.title}
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </motion.div>
 

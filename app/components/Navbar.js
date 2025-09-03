@@ -54,11 +54,8 @@ const Navbar = () => {
 
     return (
 <>
-
       <nav className="top-0 left-0 w-full bg-[#930e5c] shadow-md z-50 px-6 md:px-12 lg:px-10 py-2 pt-6 pb-5 flex items-center justify-between  h-[60px] md:h-[80px] lg:h-[80px] ">
        
- 
-        {/* Desktop Navigation */}
 {/* Desktop Navigation */}
 <ul className="hidden md:flex flex-wrap space-x-5 space-y-2 text-white w-full font-medium items-center">
 
@@ -99,13 +96,7 @@ const Navbar = () => {
     </li>
   ))}
 </ul>
-
-
 </li>
-
-
-
-
 
 <li className="relative group">
   {/* Officers button */}
@@ -184,15 +175,6 @@ const Navbar = () => {
     </li>
   </ul>
 </li>
-
-
-
-
-
-
-
-
-
 {/* Organization */}
 <li className="relative group">
   {/* Trigger */}
@@ -330,17 +312,8 @@ const Navbar = () => {
         ))}
       </ul>
     </li>
-
-
-   
-
-    
   </ul>
 </li>
-
-
-
-
   {/* Final Single Items */}
   <li><Link href="/MandatoryDisclosure" className=" px-2 py-1 inline-block text-white bg-transparent rounded-full font-serif  hover:bg-black hover:scale-105 transform transition duration-300 focus:outline-none">Mandatory Disclosure</Link></li>
     {/* Publications */}
@@ -371,8 +344,6 @@ const Navbar = () => {
             {isOpen ? <FaTimes size={28} className="text-white " /> : <FaBars size={28} className="text-white" />}
           </button>
         </div>
-  
-        {/* Mobile Menu Dropdown */}
    {/* Mobile Dropdown Menu */}
    {isOpen && (
         <div className="absolute top-55 left-0 w-full bg-[#930e5c]  shadow-md  md:hidden flex flex-col  text-white font-serif z-50">
@@ -520,9 +491,6 @@ const Navbar = () => {
           <div className="border-2 border-white"></div>
         </div>
       )}
-    
-
-       
       </nav>
       </>
     );

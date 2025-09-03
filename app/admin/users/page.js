@@ -122,7 +122,6 @@ export default function UsersPage() {
     </button>
   ) : "N/A"}
 </td>
-
                   <td className="border px-2 py-1">{new Date(u.created_at).toLocaleString()}</td>
                 </tr>
               ))
