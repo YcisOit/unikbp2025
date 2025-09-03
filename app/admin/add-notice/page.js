@@ -119,7 +119,7 @@ export default function AddNotice() {
 
             <button
               type="submit"
-              className="w-full bg-black text-white py-2 rounded hover:bg-yellow-500"
+              className="w-full bg-white text-white py-2 rounded hover:bg-yellow-500"
             >
               Add Notice
             </button>
